@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: at-pricewatch
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:pricewatch}
+    username: ${DB_USER:pricewatch}
+    password: ${DB_PASSWORD:pricewatch_local_password}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+pricewatch:
+  at-api:
+    base-url: ${AT_API_BASE_URL:https://apis.data.go.kr/B552845/perDay}
+    service-key: ${AT_API_SERVICE_KEY:}
+  alert-threshold: ${PRICE_ALERT_THRESHOLD:20.0}
